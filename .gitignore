@@ -2,4 +2,6 @@ config
 configs
 data
 db
+log
+logs
 .env
