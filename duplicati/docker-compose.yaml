@@ -1,0 +1,27 @@
+# https://docs.linuxserver.io/images/docker-duplicati/
+services:
+  duplicati:
+    image: linuxserver/duplicati:latest
+    container_name: duplicati
+    restart: always
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8200" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Paris
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - $BACKUPS_LOCATION:/backups
+      - $SOURCE_LOCATION:/source
+    ports:
+      - 8200:8200
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
