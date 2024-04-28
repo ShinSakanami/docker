@@ -5,7 +5,7 @@ services:
     container_name: freshrss
     restart: unless-stopped
     healthcheck:
-      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8080" > /dev/null
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:80" > /dev/null
       interval: 1m
       timeout: 30s
       retries: 3
