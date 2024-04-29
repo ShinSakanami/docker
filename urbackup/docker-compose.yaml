@@ -1,0 +1,22 @@
+# https://hub.docker.com/r/uroni/urbackup-server
+services:
+  urbackup:
+    image: uroni/urbackup-server:latest
+    container_name: urbackup
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./data:/var/urbackup
+      - ./log:/var/log
+      - $BACKUPS_LOCATION:/backups
+    ports:
+      - 55413-55415:55413-55415
+      - 35623:35623/udp
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
