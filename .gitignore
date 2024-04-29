@@ -4,4 +4,6 @@ data
 db
 log
 logs
+icons
+images
 .env
