@@ -1,0 +1,50 @@
+# https://docs.linuxserver.io/images/docker-nextcloud
+services:
+  nextcloud:
+    image: linuxserver/nextcloud:latest
+    container_name: nextcloud
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:80 || exit 1
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    depends_on:
+      - nextcloud-db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - $DATA_LOCATION:/data
+    ports:
+      - 443:443
+    networks:
+      - proxy
+# https://docs.linuxserver.io/images/docker-mariadb/
+  nextcloud-db:
+    image: linuxserver/mariadb:latest
+    container_name: nextcloud-db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - MYSQL_ROOT_PASSWORD=$DB_ROOT_PASSWORD
+      - MYSQL_DATABASE=nextcloud
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./db:/config
+    ports:
+      - 3306:3306
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
