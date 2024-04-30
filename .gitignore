@@ -2,6 +2,8 @@ config
 configs
 data
 db
+lib
+cache
 log
 logs
 icons
