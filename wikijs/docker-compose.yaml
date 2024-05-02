@@ -14,8 +14,8 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - /config:/config
-      - /data:/data
+      - ./config:/config
+      - ./data:/data
     ports:
       - 3015:3000
     networks:
