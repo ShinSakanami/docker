@@ -20,3 +20,7 @@ Useful commands:
 - **docker-compose down** : Stop and remove the container of the current directory
 - **docker-compose pull** : Update the container of the current directory
 - **git pull** : Update Docker Compose files
+
+# Homelab
+
+See my scripts and configuration files for my home network and servers at https://github.com/ShinSakanami/homelab
