@@ -8,5 +8,6 @@ log
 logs
 icons
 images
+upload
 letsencrypt
-.env
+*.env
