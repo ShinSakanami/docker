@@ -18,7 +18,6 @@ Useful commands:
 - **docker container ls** : Show currently running containers
 - **docker compose up -d --pull always** : Create and start the container of the current directory (update with --pull always)
 - **docker compose down** : Stop and remove the container of the current directory
-- **docker compose pull** : Update the container of the current directory
 - **docker image prune** : Remove unused images
 - **git pull** : Update Docker Compose files
 
