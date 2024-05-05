@@ -16,7 +16,7 @@ docker compose up -d
 
 Useful commands:
 - **docker container ls** : Show currently running containers
-- **docker compose up -d** : Create and start the container of the current directory
+- **docker compose up -d --pull always** : Create and start the container of the current directory (update with --pull always)
 - **docker compose down** : Stop and remove the container of the current directory
 - **docker compose pull** : Update the container of the current directory
 - **git pull** : Update Docker Compose files
