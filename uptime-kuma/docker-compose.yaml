@@ -4,10 +4,8 @@ services:
     image: louislam/uptime-kuma:latest
     container_name: uptime-kuma
     restart: unless-stopped
-    environment:
-      - PUID=0
-      - PGID=0
-      - TZ=Europe/Paris
+    env_file:
+      - .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
     # - /var/run/docker.sock:/var/run/docker.sock
