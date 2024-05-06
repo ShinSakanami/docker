@@ -4,17 +4,8 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     restart: unless-stopped
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-      # Homepage Services Configuration
-      - HOMEPAGE_VAR_TRUENAS_KEY=$HOMEPAGE_VAR_TRUENAS_KEY
-      - HOMEPAGE_VAR_NPM_USERNAME=$HOMEPAGE_VAR_NPM_USERNAME
-      - HOMEPAGE_VAR_NPM_PASSWORD=$HOMEPAGE_VAR_NPM_PASSWORD
-      - HOMEPAGE_VAR_PIHOLE_KEY=$HOMEPAGE_VAR_PIHOLE_KEY
-      - HOMEPAGE_VAR_PORTAINER_KEY=$HOMEPAGE_VAR_PORTAINER_KEY
-      - HOMEPAGE_VAR_DELUGE_PASSWORD=$HOMEPAGE_VAR_DELUGE_PASSWORD
+    env_file:
+      - .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
     # - /var/run/docker.sock:/var/run/docker.sock
