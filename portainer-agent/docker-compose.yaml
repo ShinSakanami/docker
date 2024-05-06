@@ -3,10 +3,8 @@ services:
     image: portainer/agent:latest
     container_name: portainer-agent
     restart: always
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
+    env_file:
+      - .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock
