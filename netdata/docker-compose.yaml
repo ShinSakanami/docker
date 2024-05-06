@@ -11,14 +11,8 @@ services:
       - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
-    environment:
-      - PUID=0
-      - PGID=0
-      - TZ=Europe/Paris
-      # Netdata Claim
-      - NETDATA_CLAIM_TOKEN=$NETDATA_CLAIM_TOKEN
-      - NETDATA_CLAIM_URL=$NETDATA_CLAIM_URL
-      - NETDATA_CLAIM_ROOMS=$NETDATA_CLAIM_ROOMS
+    env_file:
+      - .env
     volumes:
       - ./config:/etc/netdata
       - ./lib:/var/lib/netdata
