@@ -1,0 +1,16 @@
+# https://containrrr.dev/watchtower/
+services:
+  diun:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
