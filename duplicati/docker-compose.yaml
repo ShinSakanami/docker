@@ -3,6 +3,7 @@ services:
   duplicati:
     image: linuxserver/duplicati:latest
     container_name: duplicati
+    hostname: $HOSTNAME
     restart: always
     healthcheck:
       test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8200" > /dev/null
