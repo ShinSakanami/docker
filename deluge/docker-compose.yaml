@@ -7,6 +7,11 @@ services:
     privileged: true
     sysctls:
       - "net.ipv4.conf.all.src_valid_mark=1"
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8112" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
     env_file:
       - .env
     volumes:
@@ -16,10 +21,7 @@ services:
     ports:
       - 8112:8112
       - 8118:8118
-      - 9118:9118
       - 58846:58846
-      - 58946:58946
-      - 58946:58946/udp
     networks:
       - proxy
 networks:
