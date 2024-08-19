@@ -1,0 +1,27 @@
+# https://github.com/binhex/arch-delugevpn
+services:
+  deluge:
+    image: binhex/arch-delugevpn:latest
+    container_name: deluge
+    restart: always
+    privileged: true
+    sysctls:
+      - "net.ipv4.conf.all.src_valid_mark=1"
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - $DOWNLOADS_LOCATION:/downloads
+    ports:
+      - 8112:8112
+      - 8118:8118
+      - 9118:9118
+      - 58846:58846
+      - 58946:58946
+      - 58946:58946/udp
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
