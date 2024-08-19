@@ -1,6 +1,6 @@
 # https://containrrr.dev/watchtower/
 services:
-  diun:
+  watchtower:
     image: containrrr/watchtower:latest
     container_name: watchtower
     restart: always
