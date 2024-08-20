@@ -1,0 +1,25 @@
+# https://github.com/binhex/arch-radarr
+services:
+  radarr:
+    image: binhex/arch-radarr:latest
+    container_name: radarr
+    restart: always
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:7878" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - $DOWNLOADS_LOCATION:/downloads
+      - $MEDIA_LOCATION:/media
+    ports:
+      - 7878:7878
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
