@@ -1,0 +1,18 @@
+# https://github.com/gameyfin/gameyfin
+services:
+  gameyfin:
+    image: grimsi/gameyfin:latest
+    container_name: gameyfin
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - $GAMES_LOCATION:/opt/gameyfin-library
+    ports:
+      - 8080:8080
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
