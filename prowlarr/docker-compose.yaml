@@ -1,7 +1,7 @@
-# https://docs.linuxserver.io/images/docker-prowlarr
+# https://github.com/binhex/arch-prowlarr
 services:
   prowlarr:
-    image: linuxserver/prowlarr:latest
+    image: binhex/arch-prowlarr:latest
     container_name: prowlarr
     restart: always
     healthcheck:
@@ -13,7 +13,7 @@ services:
       - .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./config:/config
+      - ./config:/config/prowlarr
     ports:
       - 9696:9696
     networks:
