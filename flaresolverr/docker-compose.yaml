@@ -1,7 +1,7 @@
 # https://github.com/FlareSolverr/FlareSolverr
 services:
   flaresolverr:
-    image: flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:pr-1282
     container_name: flaresolverr
     restart: always
     env_file:
