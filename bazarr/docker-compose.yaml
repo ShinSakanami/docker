@@ -1,0 +1,24 @@
+# https://docs.linuxserver.io/images/docker-bazarr/
+services:
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    restart: always
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:6767" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - $MEDIA_LOCATION:/media
+    ports:
+      - 6767:6767
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
