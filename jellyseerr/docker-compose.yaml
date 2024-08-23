@@ -1,0 +1,23 @@
+# https://docs.jellyseerr.dev/getting-started/docker
+services:
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    restart: unless-stopped
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:5055" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/app/config
+    ports:
+      - 5055:5055
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
