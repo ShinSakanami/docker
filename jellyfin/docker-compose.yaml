@@ -1,0 +1,24 @@
+# https://docs.linuxserver.io/images/docker-jellyfin
+services:
+  jellyfin:
+    image: linuxserver/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8096" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - $MEDIA_LOCATION:/data/media
+    ports:
+      - 8096:8096
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
