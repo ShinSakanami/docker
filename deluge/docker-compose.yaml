@@ -3,7 +3,7 @@ services:
   deluge:
     image: binhex/arch-delugevpn:latest
     container_name: deluge
-    restart: always
+    restart: unless-stopped
     privileged: true
     sysctls:
       - "net.ipv4.conf.all.src_valid_mark=1"
@@ -17,7 +17,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config:/config
-      - $DOWNLOADS_LOCATION:/downloads
+      - $DATA_LOCATION:/data
     ports:
       - 8112:8112
       - 8118:8118

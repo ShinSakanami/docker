@@ -3,7 +3,7 @@ services:
   readarr:
     image: binhex/arch-readarr:latest
     container_name: readarr
-    restart: always
+    restart: unless-stopped
     healthcheck:
       test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8787" > /dev/null
       interval: 1m
@@ -14,8 +14,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config:/config
-      - $DOWNLOADS_LOCATION:/downloads
-      - $MEDIA_LOCATION:/media
+      - $DATA_LOCATION:/data
     ports:
       - 8787:8787
     networks:

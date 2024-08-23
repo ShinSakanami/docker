@@ -3,7 +3,7 @@ services:
   gameyfin:
     image: grimsi/gameyfin:latest
     container_name: gameyfin
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
     volumes:

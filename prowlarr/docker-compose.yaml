@@ -3,7 +3,7 @@ services:
   prowlarr:
     image: binhex/arch-prowlarr:latest
     container_name: prowlarr
-    restart: always
+    restart: unless-stopped
     healthcheck:
       test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:9696" > /dev/null
       interval: 1m

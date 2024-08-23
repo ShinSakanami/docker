@@ -3,7 +3,7 @@ services:
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:pr-1282
     container_name: flaresolverr
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
     ports:
