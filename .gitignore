@@ -10,4 +10,5 @@ icons
 images
 upload
 letsencrypt
+webui
 *.env
