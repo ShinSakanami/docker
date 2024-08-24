@@ -2,8 +2,8 @@
 services:
   sonarr:
     image: binhex/arch-sonarr:latest
-    container_name: unless-stopped
-    restart: always
+    container_name: sonarr
+    restart: unless-stopped
     healthcheck:
       test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8989" > /dev/null
       interval: 1m
