@@ -1,0 +1,36 @@
+# https://github.com/ollama/ollama
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/root/.ollama
+    networks:
+      - proxy
+    ports:
+       - 11434:11434
+# https://github.com/open-webui/open-webui
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: ollama-webui
+    restart: unless-stopped
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    depends_on:
+      - ollama
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./webui:/app/backend/data
+    networks:
+      - proxy
+    ports:
+       - 3000:8080
+networks:
+  proxy:
+    external: true
