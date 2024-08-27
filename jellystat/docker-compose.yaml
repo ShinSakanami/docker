@@ -1,0 +1,36 @@
+# https://github.com/CyferShepard/Jellystat
+services:
+  jellystat:
+    image: cyfershepard/jellystat:latest
+    container_name: jellystat
+    restart: unless-stopped
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:3000" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    depends_on:
+      - jellystat-db
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./backup-data:/app/backend/backup-data
+    ports:
+      - 3055:3000
+    networks:
+      - proxy
+  jellystat-db:
+    image: postgres:15.2
+    container_name: jellystat-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true

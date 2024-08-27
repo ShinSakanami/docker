@@ -1,6 +1,7 @@
 config
 configs
 data
+backup-data
 db
 lib
 cache
