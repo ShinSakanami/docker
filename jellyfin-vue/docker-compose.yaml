@@ -1,0 +1,22 @@
+# https://github.com/jellyfin/jellyfin-vue
+services:
+  jellyfin-vue:
+    image: ghcr.io/jellyfin/jellyfin-vue:unstable
+    container_name: jellyfin-vue
+    restart: unless-stopped
+    healthcheck:
+      test: curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:8097" > /dev/null
+      interval: 1m
+      timeout: 30s
+      retries: 3
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8097:80
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
